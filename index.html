@@ -14,19 +14,19 @@
 }
 
 body{
-    background:#eef2f7;
-    color:#111827;
+    background:#f2f5f8;
+    color:#17202a;
 }
 
 header{
-    background:linear-gradient(135deg,#071952,#088395);
+    background:linear-gradient(135deg,#061f3d,#087830);
     color:white;
-    padding:28px 15px;
     text-align:center;
+    padding:28px 15px;
 }
 
 header h1{
-    font-size:28px;
+    font-size:30px;
     letter-spacing:1px;
 }
 
@@ -36,162 +36,200 @@ header p{
 }
 
 .container{
-    max-width:650px;
+    width:94%;
+    max-width:1000px;
     margin:25px auto;
-    padding:15px;
 }
 
 .menu{
     display:grid;
-    grid-template-columns:1fr;
-    gap:15px;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:20px;
 }
 
 .menu button{
-    border:0;
-    border-radius:15px;
-    padding:22px;
-    font-size:19px;
+    border:none;
+    padding:18px 8px;
+    border-radius:12px;
+    background:white;
+    box-shadow:0 3px 12px #0002;
     font-weight:bold;
-    color:white;
     cursor:pointer;
-    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    color:#123;
 }
 
-.noticeBtn{background:#f59e0b;}
-.memberBtn{background:#10b981;}
-.adminBtn{background:#6366f1;}
+.menu button:hover{
+    background:#087830;
+    color:white;
+}
 
 .page{
     display:none;
-}
-
-.card{
     background:white;
-    border-radius:18px;
-    padding:22px;
-    margin-top:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,.10);
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 18px #0002;
 }
 
-.card h2{
-    text-align:center;
-    margin-bottom:20px;
+.page.active{
+    display:block;
+}
+
+h2{
+    color:#075d2a;
+    margin-bottom:18px;
 }
 
 input,select,textarea{
     width:100%;
-    padding:13px;
-    margin:8px 0 14px;
-    border:1px solid #ccd3dd;
-    border-radius:10px;
-    font-size:16px;
+    padding:12px;
+    margin:7px 0 12px;
+    border:1px solid #ccd3d9;
+    border-radius:8px;
+    font-size:15px;
 }
 
 textarea{
-    min-height:130px;
+    min-height:120px;
     resize:vertical;
 }
 
-.action{
+.main-btn{
     width:100%;
-    border:0;
+    border:none;
     padding:13px;
-    border-radius:10px;
+    border-radius:8px;
+    background:#087830;
     color:white;
-    background:#2563eb;
-    font-size:16px;
     font-weight:bold;
     cursor:pointer;
 }
 
-.back{
-    background:#374151;
-    margin-top:12px;
-}
-
-.danger{
-    background:#dc2626;
+.main-btn:hover{
+    background:#055d25;
 }
 
 .notice{
-    background:#fff7ed;
-    border-left:5px solid #f59e0b;
     padding:15px;
-    border-radius:10px;
+    border-left:5px solid #087830;
+    background:#f1f8f3;
+    border-radius:8px;
     margin-bottom:12px;
 }
 
-.notice h3{
-    margin-bottom:7px;
-}
-
-.notice small{
-    color:#6b7280;
-}
-
-.member-profile{
-    text-align:center;
-}
-
-.member-profile img{
-    width:150px;
-    height:150px;
-    object-fit:cover;
-    border-radius:50%;
-    border:5px solid #2563eb;
-    margin-bottom:20px;
-}
-
-.info{
-    text-align:left;
-    background:#f8fafc;
-    border-radius:12px;
-    overflow:hidden;
-}
-
-.info div{
-    padding:14px;
-    border-bottom:1px solid #e5e7eb;
-}
-
-.info div:last-child{
-    border-bottom:none;
-}
-
-.info b{
-    display:inline-block;
-    width:150px;
-}
-
-.admin-panel button{
-    margin-bottom:12px;
-}
-
-.hidden{
-    display:none !important;
-}
-
-#preview{
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    object-fit:cover;
-    display:none;
-    margin:10px auto;
+.notice-date{
+    font-size:12px;
+    color:#777;
+    margin-top:7px;
 }
 
 .empty{
     text-align:center;
-    color:#6b7280;
-    padding:25px;
+    padding:30px;
+    color:#777;
 }
 
-footer{
+.member-card{
     text-align:center;
-    padding:25px 10px;
-    color:#6b7280;
-    font-size:13px;
+    max-width:420px;
+    margin:auto;
+}
+
+.member-card img{
+    width:150px;
+    height:150px;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid #087830;
+    margin-bottom:20px;
+}
+
+.member-info{
+    text-align:left;
+}
+
+.member-info div{
+    background:#f4f7f8;
+    padding:12px;
+    margin:8px 0;
+    border-radius:8px;
+}
+
+.player-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:18px;
+}
+
+.player-card{
+    background:#f7f9fa;
+    border-radius:12px;
+    padding:15px;
+    text-align:center;
+    box-shadow:0 2px 10px #0001;
+}
+
+.player-card img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:50%;
+    border:4px solid #087830;
+}
+
+.player-card h3{
+    margin:10px 0 5px;
+}
+
+.player-card p{
+    margin:4px;
+    color:#555;
+}
+
+.admin-options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.admin-box{
+    padding:20px;
+    border:1px solid #ddd;
+    border-radius:10px;
+}
+
+#memberDashboard,
+#adminDashboard{
+    display:none;
+}
+
+.logout{
+    background:#b00020;
+    margin-top:15px;
+}
+
+.image-preview{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:50%;
+    display:none;
+    margin:10px auto;
+}
+
+@media(max-width:700px){
+    .menu{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .admin-options{
+        grid-template-columns:1fr;
+    }
+
+    header h1{
+        font-size:23px;
+    }
 }
 </style>
 </head>
@@ -199,86 +237,64 @@ footer{
 <body>
 
 <header>
-    <h1>HORINTATI SPORTS CLUB</h1>
-    <p>Official Club Portal</p>
+    <h1>⚽ HORINTATI SPORTS CLUB</h1>
+    <p>Official Sports Club Website</p>
 </header>
 
 <div class="container">
 
-    <!-- HOME -->
-    <section id="home" class="page" style="display:block;">
-        <div class="menu">
-
-            <button class="noticeBtn" onclick="showPage('noticePage')">
-                📢 NOTICE BOARD
-            </button>
-
-            <button class="memberBtn" onclick="showPage('memberLoginPage')">
-                👤 MEMBER LOGIN
-            </button>
-
-            <button class="adminBtn" onclick="showPage('adminLoginPage')">
-                🔐 ADMIN LOGIN
-            </button>
-
-        </div>
-    </section>
+<!-- MAIN MENU -->
+<div class="menu">
+    <button onclick="showPage('noticePage')">📢 Notice Board</button>
+    <button onclick="showPage('memberLoginPage')">👤 Member Login</button>
+    <button onclick="showPage('adminLoginPage')">🔐 Admin Login</button>
+    <button onclick="showPage('playerPage')">⚽ Player List</button>
+</div>
 
 
-    <!-- NOTICE BOARD -->
-    <section id="noticePage" class="page">
-
-        <div class="card">
-            <h2>📢 NOTICE BOARD</h2>
-
-            <div id="noticeList"></div>
-
-            <button class="action back" onclick="showPage('home')">
-                ← Back
-            </button>
-        </div>
-
-    </section>
+<!-- NOTICE BOARD -->
+<section id="noticePage" class="page active">
+    <h2>📢 Notice Board</h2>
+    <div id="noticeList"></div>
+</section>
 
 
-    <!-- MEMBER LOGIN -->
-    <section id="memberLoginPage" class="page">
+<!-- MEMBER LOGIN -->
+<section id="memberLoginPage" class="page">
 
-        <div class="card">
-            <h2>👤 MEMBER LOGIN</h2>
+    <div id="memberLoginBox">
 
-            <label>MEMBER NO:</label>
-            <input type="text" id="memberNo" placeholder="Enter Member No">
+        <h2>👤 Member Login</h2>
 
-            <label>PASSWORD:</label>
-            <input type="password" id="memberPassword" placeholder="Enter Password">
+        <label>Member No</label>
+        <input type="text" id="loginMemberNo"
+               placeholder="Enter Member No">
 
-            <button class="action" onclick="memberLogin()">
-                LOGIN
-            </button>
+        <label>Password</label>
+        <input type="password" id="loginPassword"
+               placeholder="Enter Password">
 
-            <button class="action back" onclick="showPage('home')">
-                ← Back
-            </button>
+        <button class="main-btn" onclick="memberLogin()">
+            Login
+        </button>
 
-            <p id="memberLoginMessage"
-               style="text-align:center;margin-top:15px;color:#dc2626;">
-            </p>
-        </div>
+        <p id="memberLoginMessage"
+           style="color:red;text-align:center;margin-top:12px;">
+        </p>
 
-    </section>
+    </div>
 
 
     <!-- MEMBER PROFILE -->
-    <section id="memberProfilePage" class="page">
+    <div id="memberDashboard">
 
-        <div class="card member-profile">
+        <h2>👤 Member Profile</h2>
 
-            <h2>MEMBER PROFILE</h2>
+        <div class="member-card">
 
-            <img id="profilePic" src="" alt="Member Photo">
+            <img id="profilePic" src="">
 
-            <div class="info">
+            <div class="member-info">
 
                 <div>
                     <b>MEMBER NAME:</b>
@@ -302,620 +318,621 @@ footer{
 
             </div>
 
-            <button class="action back" onclick="showPage('home')">
-                LOGOUT
+            <button class="main-btn logout"
+                    onclick="memberLogout()">
+                Logout
             </button>
 
         </div>
+    </div>
 
-    </section>
-
-
-    <!-- ADMIN LOGIN -->
-    <section id="adminLoginPage" class="page">
-
-        <div class="card">
-            <h2>🔐 ADMIN LOGIN</h2>
-
-            <label>ADMIN PASSWORD:</label>
-
-            <input
-                type="password"
-                id="adminPassword"
-                placeholder="Enter Admin Password"
-            >
-
-            <button class="action" onclick="adminLogin()">
-                LOGIN
-            </button>
-
-            <button class="action back" onclick="showPage('home')">
-                ← Back
-            </button>
-
-            <p id="adminMessage"
-               style="text-align:center;margin-top:15px;color:#dc2626;">
-            </p>
-        </div>
-
-    </section>
+</section>
 
 
-    <!-- ADMIN PANEL -->
-    <section id="adminPage" class="page">
+<!-- ADMIN LOGIN -->
+<section id="adminLoginPage" class="page">
 
-        <div class="card admin-panel">
+    <div id="adminLoginBox">
 
-            <h2>⚙️ ADMIN PANEL</h2>
+        <h2>🔐 Admin Login</h2>
 
-            <button class="action" onclick="showPage('addNoticePage')">
-                01. ADD NOTICE
-            </button>
+        <label>Admin Password</label>
 
-            <button class="action" onclick="showPage('addMemberPage')">
-                02. ADD MEMBER
-            </button>
+        <input type="password"
+               id="adminPassword"
+               placeholder="Enter Admin Password">
 
-            <button class="action back" onclick="showPage('home')">
-                LOGOUT
-            </button>
+        <button class="main-btn"
+                onclick="adminLogin()">
+            Admin Login
+        </button>
 
-        </div>
+        <p id="adminMessage"
+           style="color:red;text-align:center;margin-top:12px;">
+        </p>
 
-    </section>
-
-
-    <!-- ADD NOTICE -->
-    <section id="addNoticePage" class="page">
-
-        <div class="card">
-
-            <h2>📢 ADD NOTICE</h2>
-
-            <label>NOTICE TITLE:</label>
-            <input
-                type="text"
-                id="noticeTitle"
-                placeholder="Enter notice title"
-            >
-
-            <label>NOTICE DETAILS:</label>
-            <textarea
-                id="noticeDetails"
-                placeholder="Write your notice here..."
-            ></textarea>
-
-            <button class="action" onclick="addNotice()">
-                ADD NOTICE
-            </button>
-
-            <button class="action back" onclick="showPage('adminPage')">
-                ← Back to Admin
-            </button>
-
-        </div>
-
-    </section>
+    </div>
 
 
-    <!-- ADD MEMBER -->
-    <section id="addMemberPage" class="page">
+    <!-- ADMIN DASHBOARD -->
+    <div id="adminDashboard">
 
-        <div class="card">
+        <h2>⚙️ Admin Dashboard</h2>
 
-            <h2>👤 ADD MEMBER</h2>
+        <div class="admin-options">
 
-            <label>MEMBER PIC:</label>
-            <input
-                type="file"
-                id="memberPic"
-                accept="image/*"
-                onchange="previewImage(event)"
-            >
+            <div class="admin-box">
 
-            <img id="preview" alt="Preview">
+                <h3>01. Add Notice</h3>
 
-            <label>MEMBER NAME:</label>
-            <input
-                type="text"
-                id="newMemberName"
-                placeholder="Enter member name"
-            >
+                <textarea id="noticeText"
+                    placeholder="Write your notice here..."></textarea>
 
-            <label>JERSEY NUMBER:</label>
-            <input
-                type="text"
-                id="newMemberJersey"
-                placeholder="Enter jersey number"
-            >
+                <button class="main-btn"
+                        onclick="addNotice()">
+                    Add Notice
+                </button>
 
-            <label>POSITION:</label>
-            <input
-                type="text"
-                id="newMemberPosition"
-                placeholder="e.g. Forward / Defender / Goalkeeper"
-            >
+            </div>
 
-            <label>MEMBER NO:</label>
-            <input
-                type="text"
-                id="newMemberNo"
-                placeholder="Enter unique member number"
-            >
 
-            <label>MEMBER PASSWORD:</label>
-            <input
-                type="password"
-                id="newMemberPassword"
-                placeholder="Set member password"
-            >
+            <div class="admin-box">
 
-            <button class="action" onclick="addMember()">
-                ADD MEMBER
-            </button>
+                <h3>02. Add Member</h3>
 
-            <button class="action back" onclick="showPage('adminPage')">
-                ← Back to Admin
-            </button>
+                <label>MEMBER PIC</label>
 
-            <p id="memberAddMessage"
-               style="text-align:center;margin-top:15px;">
-            </p>
+                <input type="file"
+                       id="memberPic"
+                       accept="image/*"
+                       onchange="previewImage(event)">
+
+                <img id="preview"
+                     class="image-preview">
+
+                <label>MEMBER NAME:</label>
+
+                <input type="text"
+                       id="memberName"
+                       placeholder="Member Name">
+
+                <label>JERSEY NUMBER:</label>
+
+                <input type="text"
+                       id="memberJersey"
+                       placeholder="Jersey Number">
+
+                <label>POSITION:</label>
+
+                <input type="text"
+                       id="memberPosition"
+                       placeholder="Position">
+
+                <label>MEMBER NO:</label>
+
+                <input type="text"
+                       id="memberNo"
+                       placeholder="Member No">
+
+                <label>MEMBER PASSWORD:</label>
+
+                <input type="password"
+                       id="memberPassword"
+                       placeholder="Set Member Password">
+
+                <button class="main-btn"
+                        onclick="addMember()">
+                    Add Member
+                </button>
+
+            </div>
 
         </div>
 
-    </section>
+        <button class="main-btn logout"
+                onclick="adminLogout()">
+            Admin Logout
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- PLAYER LIST -->
+<section id="playerPage" class="page">
+
+    <h2>⚽ Player List</h2>
+
+    <div id="playerList"
+         class="player-grid">
+    </div>
+
+</section>
 
 </div>
 
 
-<footer>
-    © 2026 HORINTATI SPORTS CLUB
-</footer>
-
-
 <script>
 
-/* =========================================
-   ADMIN PASSWORD
-========================================= */
+/* ================================
+   DATABASE
+================================ */
 
-const ADMIN_PASSWORD = "@#$@#$@#$";
+let members =
+    JSON.parse(localStorage.getItem("HSC_MEMBERS")) || [];
+
+let notices =
+    JSON.parse(localStorage.getItem("HSC_NOTICES")) || [];
 
 
-/* =========================================
+/* ================================
    PAGE SYSTEM
-========================================= */
+================================ */
 
 function showPage(pageId){
 
-    const pages = document.querySelectorAll(".page");
-
-    pages.forEach(function(page){
-        page.style.display = "none";
+    document.querySelectorAll(".page")
+    .forEach(page=>{
+        page.classList.remove("active");
     });
 
-    document.getElementById(pageId).style.display = "block";
+    document.getElementById(pageId)
+        .classList.add("active");
 
     if(pageId === "noticePage"){
-        loadNotices();
+        displayNotices();
     }
 
-    window.scrollTo(0,0);
-}
-
-
-/* =========================================
-   NOTICE SYSTEM
-========================================= */
-
-function getNotices(){
-
-    return JSON.parse(
-        localStorage.getItem("horintati_notices") || "[]"
-    );
-
-}
-
-
-function saveNotices(notices){
-
-    localStorage.setItem(
-        "horintati_notices",
-        JSON.stringify(notices)
-    );
-
-}
-
-
-function addNotice(){
-
-    const title =
-        document.getElementById("noticeTitle").value.trim();
-
-    const details =
-        document.getElementById("noticeDetails").value.trim();
-
-    if(!title || !details){
-
-        alert("Please enter notice title and details.");
-
-        return;
+    if(pageId === "playerPage"){
+        displayPlayers();
     }
-
-    const notices = getNotices();
-
-    notices.unshift({
-
-        title:title,
-
-        details:details,
-
-        date:new Date().toLocaleString()
-
-    });
-
-    saveNotices(notices);
-
-    document.getElementById("noticeTitle").value = "";
-    document.getElementById("noticeDetails").value = "";
-
-    alert("Notice added successfully!");
-
-    showPage("adminPage");
-
 }
 
 
-function loadNotices(){
+/* ================================
+   NOTICE BOARD
+================================ */
+
+function displayNotices(){
 
     const list =
         document.getElementById("noticeList");
-
-    const notices = getNotices();
 
     list.innerHTML = "";
 
     if(notices.length === 0){
 
         list.innerHTML =
-            '<div class="empty">No notice available.</div>';
+        `<div class="empty">
+            No notice available.
+        </div>`;
 
         return;
     }
 
-    notices.forEach(function(notice){
+    notices.slice().reverse().forEach(notice=>{
 
-        const div = document.createElement("div");
+        const div =
+        document.createElement("div");
 
         div.className = "notice";
 
         div.innerHTML = `
-
-            <h3>${escapeHTML(notice.title)}</h3>
-
-            <p>${escapeHTML(notice.details).replace(/\n/g,"<br>")}</p>
-
-            <small>${escapeHTML(notice.date)}</small>
-
+            <div>${escapeHTML(notice.text)}</div>
+            <div class="notice-date">
+                ${notice.date}
+            </div>
         `;
 
         list.appendChild(div);
+    });
+}
+
+
+/* ================================
+   ADD NOTICE
+================================ */
+
+function addNotice(){
+
+    const text =
+        document.getElementById("noticeText")
+        .value.trim();
+
+    if(!text){
+
+        alert("Please write a notice.");
+
+        return;
+    }
+
+    notices.push({
+
+        text:text,
+
+        date:new Date()
+        .toLocaleString()
 
     });
-
-}
-
-
-/* =========================================
-   MEMBER SYSTEM
-========================================= */
-
-function getMembers(){
-
-    return JSON.parse(
-        localStorage.getItem("horintati_members") || "[]"
-    );
-
-}
-
-
-function saveMembers(members){
 
     localStorage.setItem(
-        "horintati_members",
-        JSON.stringify(members)
+        "HSC_NOTICES",
+        JSON.stringify(notices)
     );
 
+    document.getElementById("noticeText")
+        .value = "";
+
+    alert("Notice added successfully!");
+
+    displayNotices();
 }
 
 
-/* =========================================
-   IMAGE PREVIEW
-========================================= */
-
-function previewImage(event){
-
-    const file = event.target.files[0];
-
-    const preview =
-        document.getElementById("preview");
-
-    if(!file){
-
-        preview.style.display = "none";
-
-        return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = function(e){
-
-        preview.src = e.target.result;
-
-        preview.style.display = "block";
-
-    };
-
-    reader.readAsDataURL(file);
-
-}
-
-
-/* =========================================
-   ADD MEMBER
-========================================= */
-
-function addMember(){
-
-    const file =
-        document.getElementById("memberPic").files[0];
-
-    const name =
-        document.getElementById("newMemberName").value.trim();
-
-    const jersey =
-        document.getElementById("newMemberJersey").value.trim();
-
-    const position =
-        document.getElementById("newMemberPosition").value.trim();
-
-    const memberNo =
-        document.getElementById("newMemberNo").value.trim();
-
-    const password =
-        document.getElementById("newMemberPassword").value;
-
-    const message =
-        document.getElementById("memberAddMessage");
-
-
-    if(!file){
-
-        message.style.color = "#dc2626";
-
-        message.textContent =
-            "Please select member picture.";
-
-        return;
-    }
-
-    if(!name || !jersey || !position || !memberNo || !password){
-
-        message.style.color = "#dc2626";
-
-        message.textContent =
-            "Please fill in all member information.";
-
-        return;
-    }
-
-
-    const members = getMembers();
-
-
-    const exists = members.some(function(member){
-
-        return member.memberNo === memberNo;
-
-    });
-
-
-    if(exists){
-
-        message.style.color = "#dc2626";
-
-        message.textContent =
-            "This Member No already exists.";
-
-        return;
-    }
-
-
-    const reader = new FileReader();
-
-
-    reader.onload = function(e){
-
-        const newMember = {
-
-            picture:e.target.result,
-
-            name:name,
-
-            jersey:jersey,
-
-            position:position,
-
-            memberNo:memberNo,
-
-            password:password
-
-        };
-
-
-        members.push(newMember);
-
-        saveMembers(members);
-
-
-        document.getElementById("memberPic").value = "";
-
-        document.getElementById("newMemberName").value = "";
-
-        document.getElementById("newMemberJersey").value = "";
-
-        document.getElementById("newMemberPosition").value = "";
-
-        document.getElementById("newMemberNo").value = "";
-
-        document.getElementById("newMemberPassword").value = "";
-
-        document.getElementById("preview").style.display = "none";
-
-
-        message.style.color = "#059669";
-
-        message.textContent =
-            "Member added successfully!";
-
-
-    };
-
-
-    reader.readAsDataURL(file);
-
-}
-
-
-/* =========================================
-   MEMBER LOGIN
-========================================= */
-
-function memberLogin(){
-
-    const memberNo =
-        document.getElementById("memberNo").value.trim();
-
-    const password =
-        document.getElementById("memberPassword").value;
-
-
-    const members = getMembers();
-
-
-    const member = members.find(function(m){
-
-        return (
-            m.memberNo === memberNo &&
-            m.password === password
-        );
-
-    });
-
-
-    const message =
-        document.getElementById("memberLoginMessage");
-
-
-    if(!member){
-
-        message.textContent =
-            "Invalid Member No or Password.";
-
-        return;
-    }
-
-
-    message.textContent = "";
-
-
-    document.getElementById("profilePic").src =
-        member.picture;
-
-    document.getElementById("profileName").textContent =
-        member.name;
-
-    document.getElementById("profileJersey").textContent =
-        member.jersey;
-
-    document.getElementById("profilePosition").textContent =
-        member.position;
-
-    document.getElementById("profileNo").textContent =
-        member.memberNo;
-
-
-    document.getElementById("memberNo").value = "";
-
-    document.getElementById("memberPassword").value = "";
-
-
-    showPage("memberProfilePage");
-
-}
-
-
-/* =========================================
+/* ================================
    ADMIN LOGIN
-========================================= */
+================================ */
 
 function adminLogin(){
 
     const password =
-        document.getElementById("adminPassword").value;
+        document.getElementById("adminPassword")
+        .value;
 
-    const message =
-        document.getElementById("adminMessage");
+    /*
+      Admin password requested by you:
+      @#$@#$@#$
+    */
 
+    if(password === "@#$@#$@#$"){
 
-    if(password === ADMIN_PASSWORD){
+        document.getElementById("adminLoginBox")
+            .style.display = "none";
 
-        message.textContent = "";
-
-        document.getElementById("adminPassword").value = "";
-
-        showPage("adminPage");
+        document.getElementById("adminDashboard")
+            .style.display = "block";
 
     }else{
 
-        message.textContent =
+        document.getElementById("adminMessage")
+            .textContent =
             "Incorrect admin password.";
-
     }
-
 }
 
 
-/* =========================================
-   SECURITY / DISPLAY HELPER
-========================================= */
+function adminLogout(){
+
+    document.getElementById("adminLoginBox")
+        .style.display = "block";
+
+    document.getElementById("adminDashboard")
+        .style.display = "none";
+
+    document.getElementById("adminPassword")
+        .value = "";
+}
+
+
+/* ================================
+   IMAGE PREVIEW
+================================ */
+
+let selectedImage = "";
+
+function previewImage(event){
+
+    const file =
+        event.target.files[0];
+
+    if(!file) return;
+
+    const reader =
+        new FileReader();
+
+    reader.onload = function(e){
+
+        selectedImage = e.target.result;
+
+        const preview =
+            document.getElementById("preview");
+
+        preview.src =
+            selectedImage;
+
+        preview.style.display =
+            "block";
+    };
+
+    reader.readAsDataURL(file);
+}
+
+
+/* ================================
+   ADD MEMBER
+================================ */
+
+function addMember(){
+
+    const name =
+        document.getElementById("memberName")
+        .value.trim();
+
+    const jersey =
+        document.getElementById("memberJersey")
+        .value.trim();
+
+    const position =
+        document.getElementById("memberPosition")
+        .value.trim();
+
+    const no =
+        document.getElementById("memberNo")
+        .value.trim();
+
+    const password =
+        document.getElementById("memberPassword")
+        .value;
+
+    if(!selectedImage){
+
+        alert("Please select member picture.");
+
+        return;
+    }
+
+    if(!name || !jersey || !position ||
+       !no || !password){
+
+        alert("Please fill all member information.");
+
+        return;
+    }
+
+    if(members.some(member =>
+       member.no === no)){
+
+        alert("This Member No already exists.");
+
+        return;
+    }
+
+    members.push({
+
+        image:selectedImage,
+
+        name:name,
+
+        jersey:jersey,
+
+        position:position,
+
+        no:no,
+
+        password:password
+
+    });
+
+    localStorage.setItem(
+        "HSC_MEMBERS",
+        JSON.stringify(members)
+    );
+
+    alert(
+        "Member added successfully!"
+    );
+
+    clearMemberForm();
+
+    displayPlayers();
+}
+
+
+/* ================================
+   CLEAR MEMBER FORM
+================================ */
+
+function clearMemberForm(){
+
+    document.getElementById("memberPic")
+        .value = "";
+
+    document.getElementById("memberName")
+        .value = "";
+
+    document.getElementById("memberJersey")
+        .value = "";
+
+    document.getElementById("memberPosition")
+        .value = "";
+
+    document.getElementById("memberNo")
+        .value = "";
+
+    document.getElementById("memberPassword")
+        .value = "";
+
+    document.getElementById("preview")
+        .style.display = "none";
+
+    selectedImage = "";
+}
+
+
+/* ================================
+   MEMBER LOGIN
+================================ */
+
+function memberLogin(){
+
+    const no =
+        document.getElementById("loginMemberNo")
+        .value.trim();
+
+    const password =
+        document.getElementById("loginPassword")
+        .value;
+
+    const member =
+        members.find(m =>
+            m.no === no &&
+            m.password === password
+        );
+
+    if(!member){
+
+        document.getElementById(
+            "memberLoginMessage"
+        ).textContent =
+        "Member No or Password is incorrect.";
+
+        return;
+    }
+
+    document.getElementById(
+        "memberLoginBox"
+    ).style.display = "none";
+
+    document.getElementById(
+        "memberDashboard"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "profilePic"
+    ).src = member.image;
+
+    document.getElementById(
+        "profileName"
+    ).textContent = " " + member.name;
+
+    document.getElementById(
+        "profileJersey"
+    ).textContent = " " + member.jersey;
+
+    document.getElementById(
+        "profilePosition"
+    ).textContent = " " + member.position;
+
+    document.getElementById(
+        "profileNo"
+    ).textContent = " " + member.no;
+}
+
+
+/* ================================
+   MEMBER LOGOUT
+================================ */
+
+function memberLogout(){
+
+    document.getElementById(
+        "memberLoginBox"
+    ).style.display = "block";
+
+    document.getElementById(
+        "memberDashboard"
+    ).style.display = "none";
+
+    document.getElementById(
+        "loginMemberNo"
+    ).value = "";
+
+    document.getElementById(
+        "loginPassword"
+    ).value = "";
+
+    document.getElementById(
+        "memberLoginMessage"
+    ).textContent = "";
+}
+
+
+/* ================================
+   PLAYER LIST
+================================ */
+
+function displayPlayers(){
+
+    const list =
+        document.getElementById(
+            "playerList"
+        );
+
+    list.innerHTML = "";
+
+    if(members.length === 0){
+
+        list.innerHTML =
+        `<div class="empty">
+            No players added yet.
+        </div>`;
+
+        return;
+    }
+
+    members.forEach(member=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "player-card";
+
+        /*
+          IMPORTANT:
+          Password is NOT displayed
+          in Player List.
+        */
+
+        card.innerHTML = `
+
+            <img src="${member.image}"
+                 alt="Player">
+
+            <h3>
+                ${escapeHTML(member.name)}
+            </h3>
+
+            <p>
+                Jersey: ${escapeHTML(member.jersey)}
+            </p>
+
+            <p>
+                Position: ${escapeHTML(member.position)}
+            </p>
+
+        `;
+
+        list.appendChild(card);
+    });
+}
+
+
+/* ================================
+   SECURITY HELPER
+================================ */
 
 function escapeHTML(text){
 
-    return String(text)
+    const div =
+        document.createElement("div");
 
-        .replace(/&/g,"&amp;")
+    div.textContent = text;
 
-        .replace(/</g,"&lt;")
-
-        .replace(/>/g,"&gt;")
-
-        .replace(/"/g,"&quot;")
-
-        .replace(/'/g,"&#039;");
-
+    return div.innerHTML;
 }
 
 
-/* =========================================
+/* ================================
    INITIAL LOAD
-========================================= */
+================================ */
 
-loadNotices();
+displayNotices();
+displayPlayers();
 
 </script>
 
 </body>
-  </html>
+    </html>
