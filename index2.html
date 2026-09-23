@@ -1,177 +1,918 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horintati Sports Club</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; background: #f4f4f9; padding: 10px; }
-        nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        button { padding: 10px 15px; cursor: pointer; border: none; background: #007bff; color: white; border-radius: 5px; }
-        .section { display: none; max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        .active { display: block; }
-        input, textarea { width: 90%; padding: 8px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px; }
-        .card { border: 1px solid #eee; padding: 10px; margin: 10px 0; border-radius: 5px; }
-        .player-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HORINTATI SPORTS CLUB</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:Arial,sans-serif;
+
+      /* Beautiful Sports Background */
+      background:
+        linear-gradient(
+          rgba(0,20,45,0.78),
+          rgba(0,80,45,0.78)
+        ),
+        url("https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=1800&q=85");
+
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+    }
+
+    /* Header */
+
+    .club-header{
+      text-align:center;
+      color:white;
+      padding:30px 15px 20px;
+      text-shadow:0 3px 8px #000;
+    }
+
+    .club-header h1{
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:1px;
+    }
+
+    .club-header p{
+      margin-top:6px;
+      font-size:14px;
+      opacity:.9;
+    }
+
+    /* Three Dot Button */
+
+    .menu-button{
+      position:fixed;
+      top:18px;
+      right:18px;
+
+      width:50px;
+      height:50px;
+
+      border:none;
+      border-radius:50%;
+
+      background:white;
+      color:#075d2a;
+
+      font-size:30px;
+      font-weight:bold;
+
+      cursor:pointer;
+
+      box-shadow:0 5px 18px rgba(0,0,0,.35);
+
+      z-index:1001;
+    }
+
+    .menu-button:active{
+      transform:scale(.95);
+    }
+
+    /* Three Dot Menu */
+
+    .three-menu{
+      position:fixed;
+
+      top:78px;
+      right:18px;
+
+      width:235px;
+
+      background:rgba(255,255,255,.98);
+
+      border-radius:15px;
+
+      padding:9px;
+
+      box-shadow:0 8px 30px rgba(0,0,0,.35);
+
+      z-index:1000;
+
+      display:none;
+    }
+
+    .three-menu.active{
+      display:block;
+    }
+
+    .three-menu button{
+      width:100%;
+
+      border:none;
+      background:white;
+
+      padding:14px;
+
+      margin:2px 0;
+
+      border-radius:10px;
+
+      text-align:left;
+
+      font-size:15px;
+      font-weight:bold;
+
+      cursor:pointer;
+    }
+
+    .three-menu button:hover{
+      background:#087830;
+      color:white;
+    }
+
+    /* Main Cards */
+
+    .main-area{
+      width:94%;
+      max-width:1000px;
+      margin:5px auto 30px;
+    }
+
+    .tab{
+      background:rgba(255,255,255,.96);
+
+      padding:22px;
+
+      border-radius:18px;
+
+      box-shadow:0 8px 30px rgba(0,0,0,.25);
+
+      backdrop-filter:blur(8px);
+    }
+
+    /* Player */
+
+    .player-card{
+      background:#f7faf8;
+
+      border-radius:14px;
+
+      padding:14px;
+
+      text-align:center;
+
+      box-shadow:0 3px 12px rgba(0,0,0,.12);
+    }
+
+    .player-card img{
+      width:100px;
+      height:100px;
+
+      object-fit:cover;
+
+      border-radius:50%;
+
+      border:4px solid #087830;
+    }
+
+    /* Notice */
+
+    .notice{
+      padding:13px;
+
+      margin:8px 0;
+
+      border-left:5px solid #087830;
+
+      background:#f1f8f3;
+
+      border-radius:8px;
+    }
+
+    @media(max-width:600px){
+
+      .club-header h1{
+        font-size:22px;
+      }
+
+      .main-area{
+        width:92%;
+      }
+
+      .tab{
+        padding:17px;
+      }
+
+      .three-menu{
+        width:215px;
+      }
+
+    }
+
+  </style>
 </head>
+
+
 <body>
-    <h1>HORINTATI SPORTS CLUB</h1>
-    <nav>
-        <button onclick="show('notices')">Notice Board</button>
-        <button onclick="show('players')">Player List</button>
-        <button onclick="show('member-login')">Member Login</button>
-        <button onclick="show('admin-login')">Admin Login</button>
-    </nav>
 
-    <!-- Notice Board -->
-    <div id="notices" class="section active">
-        <h2>Notice Board</h2>
-        <div id="notice-list">No notices yet.</div>
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="club-header">
+
+  <h1>⚽ HORINTATI SPORTS CLUB</h1>
+
+  <p>Official Sports Club</p>
+
+</header>
+
+
+<!-- =========================
+     THREE DOT BUTTON
+========================= -->
+
+<button
+  id="menuButton"
+  class="menu-button"
+  onclick="toggleMenu()">
+
+  ⋮
+
+</button>
+
+
+<!-- =========================
+     THREE DOT MENU
+========================= -->
+
+<div id="threeMenu" class="three-menu">
+
+  <button onclick="openPage('notices')">
+    📢 Notice Board
+  </button>
+
+  <button onclick="openPage('players')">
+    ⚽ Player List
+  </button>
+
+  <button onclick="openPage('memLogin')">
+    👤 Member Login
+  </button>
+
+  <button onclick="openPage('admLogin')">
+    🔐 Admin Login
+  </button>
+
+</div>
+
+
+<!-- =========================
+     MAIN AREA
+========================= -->
+
+<div class="main-area">
+
+
+  <!-- NOTICE BOARD -->
+
+  <div
+    id="notices"
+    class="tab">
+
+    Loading Notices...
+
+  </div>
+
+
+  <!-- PLAYER LIST -->
+
+  <div
+    id="players"
+    class="tab hidden">
+
+    Loading Players...
+
+  </div>
+
+
+  <!-- MEMBER LOGIN -->
+
+  <div
+    id="memLogin"
+    class="tab hidden">
+
+    <div id="loginForm">
+
+      <h2 class="font-bold text-xl mb-3">
+        👤 Member Login
+      </h2>
+
+      <input
+        id="mId"
+        placeholder="Member No"
+        class="border p-3 w-full my-1 rounded">
+
+      <input
+        id="mPw"
+        type="password"
+        placeholder="Password"
+        class="border p-3 w-full my-1 rounded">
+
+      <button
+        onclick="loginMember()"
+        class="bg-blue-600 text-white w-full p-3 mt-2 rounded font-bold">
+
+        Login
+
+      </button>
+
     </div>
 
-    <!-- Player List (Public) -->
-    <div id="players" class="section">
-        <h2>Player List</h2>
-        <div id="player-list">Loading players...</div>
+
+    <div
+      id="memProfile"
+      class="hidden text-center">
+
     </div>
 
-    <!-- Member Login -->
-    <div id="member-login" class="section">
-        <h2>Member Login</h2>
-        <input id="m-no" placeholder="Member No">
-        <input id="m-pass" type="password" placeholder="Password">
-        <button onclick="memberLogin()">Login</button>
-        <div id="member-profile" style="margin-top:20px;"></div>
+  </div>
+
+
+  <!-- ADMIN LOGIN -->
+
+  <div
+    id="admLogin"
+    class="tab hidden">
+
+    <div id="adminForm">
+
+      <h2 class="font-bold text-xl mb-3">
+        🔐 Admin Login
+      </h2>
+
+      <input
+        id="aPw"
+        type="password"
+        placeholder="Admin Password"
+        class="border p-3 w-full my-1 rounded">
+
+      <button
+        onclick="loginAdmin()"
+        class="bg-red-600 text-white w-full p-3 mt-2 rounded font-bold">
+
+        Login
+
+      </button>
+
     </div>
 
-    <!-- Admin Login -->
-    <div id="admin-login" class="section">
-        <h2>Admin Login</h2>
-        <div id="admin-auth">
-            <input id="a-pass" type="password" placeholder="Admin Password">
-            <button onclick="adminLogin()">Login</button>
+
+    <!-- ADMIN PANEL -->
+
+    <div id="adminPanel" class="hidden">
+
+      <h3 class="font-bold text-red-600 text-xl mb-3">
+        ⚙️ Admin Dashboard
+      </h3>
+
+
+      <!-- ADD NOTICE -->
+
+      <h4 class="font-bold mb-2">
+        01. Add Notice
+      </h4>
+
+      <input
+        id="notTxt"
+        placeholder="Write Notice"
+        class="border p-3 w-full my-1 rounded">
+
+      <button
+        onclick="addNotice()"
+        class="bg-green-600 text-white p-3 w-full my-1 rounded font-bold">
+
+        Add Notice
+
+      </button>
+
+
+      <hr class="my-5">
+
+
+      <!-- ADD MEMBER -->
+
+      <h4 class="font-bold mb-2">
+        02. Add Member
+      </h4>
+
+      <input
+        id="regId"
+        placeholder="Member No"
+        class="border p-3 w-full my-1 rounded">
+
+      <input
+        id="regName"
+        placeholder="Name"
+        class="border p-3 w-full my-1 rounded">
+
+      <input
+        id="regJersey"
+        placeholder="Jersey Number"
+        class="border p-3 w-full my-1 rounded">
+
+      <input
+        id="regPos"
+        placeholder="Position"
+        class="border p-3 w-full my-1 rounded">
+
+      <input
+        id="regFile"
+        type="file"
+        accept="image/*"
+        class="border p-2 w-full my-1 rounded">
+
+      <input
+        id="regPw"
+        type="password"
+        placeholder="Member Password"
+        class="border p-3 w-full my-1 rounded">
+
+      <button
+        onclick="addMember()"
+        class="bg-blue-600 text-white p-3 w-full mt-2 rounded font-bold">
+
+        Add Member
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+/* =========================
+   FIREBASE
+========================= */
+
+import {
+  initializeApp
+}
+from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+
+
+import {
+  getDatabase,
+  ref,
+  set,
+  push,
+  onValue,
+  get
+}
+from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+
+const app = initializeApp({
+
+  databaseURL:
+  "https://horintati-sports-club-9e801-default-rtdb.firebaseio.com"
+
+});
+
+
+const db = getDatabase(app);
+
+
+/* =========================
+   THREE DOT MENU
+========================= */
+
+window.toggleMenu = () => {
+
+  document
+    .getElementById("threeMenu")
+    .classList.toggle("active");
+
+};
+
+
+/* =========================
+   OPEN PAGE
+========================= */
+
+window.openPage = (id) => {
+
+  document
+    .querySelectorAll(".tab")
+    .forEach(e =>
+      e.classList.add("hidden")
+    );
+
+
+  document
+    .getElementById(id)
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("threeMenu")
+    .classList.remove("active");
+
+};
+
+
+/* =========================
+   NOTICE BOARD
+========================= */
+
+onValue(
+  ref(db,"notices"),
+  snap => {
+
+    const div =
+      document.getElementById("notices");
+
+
+    div.innerHTML =
+      `
+      <h2 class="font-bold text-xl mb-3">
+        📢 Notice Board
+      </h2>
+      `;
+
+
+    if(!snap.exists()){
+
+      div.innerHTML +=
+        `
+        <p class="text-gray-500 text-center py-8">
+          No notice available.
+        </p>
+        `;
+
+      return;
+
+    }
+
+
+    snap.forEach(child => {
+
+      div.innerHTML +=
+        `
+        <div class="notice">
+          ${child.val().text}
         </div>
-        <div id="admin-panel" style="display:none;">
-            <h3>Admin Panel</h3>
-            <button onclick="adminLogout()" style="background:#dc3545;">Logout</button>
-            <h4>01. Add Notice</h4>
-            <textarea id="n-text" placeholder="Write notice here..."></textarea>
-            <button onclick="addNotice()">Add Notice</button>
+        `;
 
-            <h4>02. Add Member</h4>
-            <input id="new-name" placeholder="Member Name">
-            <input id="new-jersey" placeholder="Jersey Number">
-            <input id="new-pos" placeholder="Position">
-            <input id="new-no" placeholder="Member No">
-            <input id="new-pass" type="password" placeholder="Password">
-            <input type="file" id="new-pic" accept="image/*">
-            <button onclick="addMember()">Save Member</button>
+    });
+
+  }
+);
+
+
+/* =========================
+   PLAYER LIST
+========================= */
+
+onValue(
+  ref(db,"members"),
+  snap => {
+
+    const div =
+      document.getElementById("players");
+
+
+    div.innerHTML =
+      `
+      <h2 class="font-bold text-xl mb-4">
+        ⚽ Player List
+      </h2>
+
+      <div
+        id="playerGrid"
+        class="grid grid-cols-2 gap-4">
+      </div>
+      `;
+
+
+    const grid =
+      document.getElementById("playerGrid");
+
+
+    if(!snap.exists()){
+
+      grid.innerHTML =
+        `
+        <p class="text-gray-500 text-center col-span-full py-8">
+          No players added yet.
+        </p>
+        `;
+
+      return;
+
+    }
+
+
+    snap.forEach(child => {
+
+      const m =
+        child.val();
+
+
+      grid.innerHTML +=
+        `
+        <div class="player-card">
+
+          <img
+            src="${m.pic}"
+            alt="Player">
+
+          <p class="font-bold mt-2">
+            ${m.name}
+          </p>
+
         </div>
-    </div>
+        `;
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, set, push, onValue, get, child } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-        import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+    });
 
-        const firebaseConfig = {
-            databaseURL: "https://horintati-sports-club-9e801-default-rtdb.firebaseio.com",
-            storageBucket: "horintati-sports-club-9e801.appspot.com"
-        };
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const storage = getStorage(app);
+  }
+);
 
-        window.show = (id) => {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-        };
 
-        // Load Notices
-        onValue(ref(db, 'notices'), (snapshot) => {
-            const list = document.getElementById('notice-list');
-            list.innerHTML = "";
-            if (snapshot.exists()) {
-                Object.values(snapshot.val()).reverse().forEach(n => {
-                    list.innerHTML += `<div class="card"><p>${n.text}</p><small>${n.date}</small></div>`;
-                });
-            } else { list.innerHTML = "No notices posted."; }
-        });
+/* =========================
+   MEMBER LOGIN
+========================= */
 
-        // Load Public Player List
-        onValue(ref(db, 'members'), (snapshot) => {
-            const list = document.getElementById('player-list');
-            list.innerHTML = "";
-            if (snapshot.exists()) {
-                Object.values(snapshot.val()).forEach(m => {
-                    list.innerHTML += `
-                        <div class="card">
-                            <img class="player-img" src="${m.picUrl || 'https://via.placeholder.com/150'}" alt="Player">
-                            <h3>${m.name}</h3>
-                            <p>Jersey: ${m.jersey} | Position: ${m.position}</p>
-                        </div>`;
-                });
-            } else { list.innerHTML = "No players found."; }
-        });
+window.loginMember = async () => {
 
-        // Member Login
-        window.memberLogin = async () => {
-            const no = document.getElementById('m-no').value;
-            const pass = document.getElementById('m-pass').value;
-            const snap = await get(child(ref(db), `members/${no}`));
-            const profile = document.getElementById('member-profile');
-            if (snap.exists() && snap.val().password === pass) {
-                const m = snap.val();
-                profile.innerHTML = `
-                    <img class="player-img" src="${m.picUrl || 'https://via.placeholder.com/150'}"><br>
-                    <strong>MEMBER NAME:</strong> ${m.name}<br>
-                    <strong>JERSEY NUMBER:</strong> ${m.jersey}<br>
-                    <strong>POSITION:</strong> ${m.position}<br>
-                    <strong>MEMBER NO:</strong> ${m.no}`;
-            } else { alert("ভুল মেম্বার আইডি বা পাসওয়ার্ড!"); }
-        };
+  const id =
+    document.getElementById("mId").value;
 
-        // Admin Auth
-        window.adminLogin = () => {
-            if (document.getElementById('a-pass').value === '@#$@#$@#$') {
-                document.getElementById('admin-auth').style.display = 'none';
-                document.getElementById('admin-panel').style.display = 'block';
-            } else { alert("ভুল এডমিন পাসওয়ার্ড!"); }
-        };
-        window.adminLogout = () => {
-            document.getElementById('admin-auth').style.display = 'block';
-            document.getElementById('admin-panel').style.display = 'none';
-            document.getElementById('a-pass').value = '';
-        };
+  const pw =
+    document.getElementById("mPw").value;
 
-        // Admin actions
-        window.addNotice = () => {
-            const text = document.getElementById('n-text').value;
-            if(!text) return;
-            push(ref(db, 'notices'), { text, date: new Date().toLocaleDateString() });
-            document.getElementById('n-text').value = '';
-            alert("নোটিশ অ্যাড হয়েছে!");
-        };
 
-        window.addMember = async () => {
-            const name = document.getElementById('new-name').value;
-            const jersey = document.getElementById('new-jersey').value;
-            const position = document.getElementById('new-pos').value;
-            const no = document.getElementById('new-no').value;
-            const password = document.getElementById('new-pass').value;
-            const file = document.getElementById('new-pic').files[0];
+  const snap =
+    await get(
+      ref(db,`members/${id}`)
+    );
 
-            if(!name || !no || !password || !file) { alert("সব তথ্য পূরণ করুন!"); return; }
 
-            const fileRef = sRef(storage, `member_pics/${no}`);
-            await uploadBytes(fileRef, file);
-            const picUrl = await getDownloadURL(fileRef);
+  if(
+    snap.exists() &&
+    snap.val().password === pw
+  ){
 
-            await set(ref(db, `members/${no}`), { name, jersey, position, no, password, picUrl });
-            alert("মেম্বার সফলভাবে অ্যাড হয়েছে!");
-            document.querySelectorAll('#admin-panel input').forEach(i => i.value = '');
-        };
-    </script>
+    const m =
+      snap.val();
+
+
+    document
+      .getElementById("loginForm")
+      .classList.add("hidden");
+
+
+    const prof =
+      document.getElementById("memProfile");
+
+
+    prof.classList.remove("hidden");
+
+
+    prof.innerHTML =
+      `
+      <img
+        src="${m.pic}"
+        class="w-28 h-28 rounded-full mx-auto object-cover mb-4 border-4 border-green-600">
+
+      <p class="text-left mb-2">
+        <b>MEMBER NAME:</b>
+        ${m.name}
+      </p>
+
+      <p class="text-left mb-2">
+        <b>JERSY NUMBER:</b>
+        ${m.jersey}
+      </p>
+
+      <p class="text-left mb-2">
+        <b>POSITION:</b>
+        ${m.position}
+      </p>
+
+      <p class="text-left">
+        <b>MEMBER NO:</b>
+        ${id}
+      </p>
+      `;
+
+  }
+
+  else{
+
+    alert("ভুল তথ্য দিয়েছেন!");
+
+  }
+
+};
+
+
+/* =========================
+   ADMIN LOGIN
+========================= */
+
+window.loginAdmin = () => {
+
+  if(
+    document.getElementById("aPw").value
+    === "@#$@#$@#$"
+  ){
+
+    document
+      .getElementById("adminForm")
+      .classList.add("hidden");
+
+
+    document
+      .getElementById("adminPanel")
+      .classList.remove("hidden");
+
+  }
+
+  else{
+
+    alert("পাসওয়ার্ড ভুল!");
+
+  }
+
+};
+
+
+/* =========================
+   ADD NOTICE
+========================= */
+
+window.addNotice = () => {
+
+  const txt =
+    document.getElementById("notTxt")
+    .value;
+
+
+  if(txt){
+
+    push(
+      ref(db,"notices"),
+      {
+        text:txt
+      }
+    )
+    .then(() => {
+
+      alert("Notice added!");
+
+      document
+        .getElementById("notTxt")
+        .value="";
+
+    });
+
+  }
+
+};
+
+
+/* =========================
+   ADD MEMBER
+========================= */
+
+window.addMember = () => {
+
+  const id =
+    document.getElementById("regId")
+    .value;
+
+  const name =
+    document.getElementById("regName")
+    .value;
+
+  const jr =
+    document.getElementById("regJersey")
+    .value;
+
+  const pos =
+    document.getElementById("regPos")
+    .value;
+
+  const pw =
+    document.getElementById("regPw")
+    .value;
+
+  const file =
+    document.getElementById("regFile")
+    .files[0];
+
+
+  if(
+    !id ||
+    !name ||
+    !file ||
+    !pw
+  ){
+
+    alert("সব তথ্য পূরণ করুন!");
+
+    return;
+
+  }
+
+
+  const r =
+    new FileReader();
+
+
+  r.onload = () => {
+
+    set(
+      ref(db,`members/${id}`),
+
+      {
+        name,
+        jersey:jr,
+        position:pos,
+        password:pw,
+        pic:r.result
+      }
+
+    )
+    .then(() => {
+
+      alert(
+        "Member added successfully!"
+      );
+
+
+      document
+        .getElementById("adminPanel")
+        .querySelectorAll("input")
+        .forEach(i =>
+          i.value=""
+        );
+
+    });
+
+  };
+
+
+  r.readAsDataURL(file);
+
+};
+
+</script>
+
+
+<!-- =========================
+     CLOSE MENU WHEN CLICKING
+     OUTSIDE
+========================= -->
+
+<script>
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    const menu =
+      document.getElementById("threeMenu");
+
+    const button =
+      document.getElementById("menuButton");
+
+
+    if(
+      !menu.contains(event.target) &&
+      !button.contains(event.target)
+    ){
+
+      menu.classList.remove("active");
+
+    }
+
+  }
+);
+
+</script>
+
+
 </body>
-</html>
+        </html>
