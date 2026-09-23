@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horintati Sports Club</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background: #f4f4f9; padding: 10px; }
+        nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        button { padding: 10px 15px; cursor: pointer; border: none; background: #007bff; color: white; border-radius: 5px; }
+        .section { display: none; max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .active { display: block; }
+        input, textarea { width: 90%; padding: 8px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px; }
+        .card { border: 1px solid #eee; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .player-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h1>HORINTATI SPORTS CLUB</h1>
+    <nav>
+        <button onclick="show('notices')">Notice Board</button>
+        <button onclick="show('players')">Player List</button>
+        <button onclick="show('member-login')">Member Login</button>
+        <button onclick="show('admin-login')">Admin Login</button>
+    </nav>
+
+    <!-- Notice Board -->
+    <div id="notices" class="section active">
+        <h2>Notice Board</h2>
+        <div id="notice-list">No notices yet.</div>
+    </div>
+
+    <!-- Player List (Public) -->
+    <div id="players" class="section">
+        <h2>Player List</h2>
+        <div id="player-list">Loading players...</div>
+    </div>
+
+    <!-- Member Login -->
+    <div id="member-login" class="section">
+        <h2>Member Login</h2>
+        <input id="m-no" placeholder="Member No">
+        <input id="m-pass" type="password" placeholder="Password">
+        <button onclick="memberLogin()">Login</button>
+        <div id="member-profile" style="margin-top:20px;"></div>
+    </div>
+
+    <!-- Admin Login -->
+    <div id="admin-login" class="section">
+        <h2>Admin Login</h2>
+        <div id="admin-auth">
+            <input id="a-pass" type="password" placeholder="Admin Password">
+            <button onclick="adminLogin()">Login</button>
+        </div>
+        <div id="admin-panel" style="display:none;">
+            <h3>Admin Panel</h3>
+            <button onclick="adminLogout()" style="background:#dc3545;">Logout</button>
+            <h4>01. Add Notice</h4>
+            <textarea id="n-text" placeholder="Write notice here..."></textarea>
+            <button onclick="addNotice()">Add Notice</button>
+
+            <h4>02. Add Member</h4>
+            <input id="new-name" placeholder="Member Name">
+            <input id="new-jersey" placeholder="Jersey Number">
+            <input id="new-pos" placeholder="Position">
+            <input id="new-no" placeholder="Member No">
+            <input id="new-pass" type="password" placeholder="Password">
+            <input type="file" id="new-pic" accept="image/*">
+            <button onclick="addMember()">Save Member</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, set, push, onValue, get, child } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+
+        const firebaseConfig = {
+            databaseURL: "https://horintati-sports-club-9e801-default-rtdb.firebaseio.com",
+            storageBucket: "horintati-sports-club-9e801.appspot.com"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const storage = getStorage(app);
+
+        window.show = (id) => {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        };
+
+        // Load Notices
+        onValue(ref(db, 'notices'), (snapshot) => {
+            const list = document.getElementById('notice-list');
+            list.innerHTML = "";
+            if (snapshot.exists()) {
+                Object.values(snapshot.val()).reverse().forEach(n => {
+                    list.innerHTML += `<div class="card"><p>${n.text}</p><small>${n.date}</small></div>`;
+                });
+            } else { list.innerHTML = "No notices posted."; }
+        });
+
+        // Load Public Player List
+        onValue(ref(db, 'members'), (snapshot) => {
+            const list = document.getElementById('player-list');
+            list.innerHTML = "";
+            if (snapshot.exists()) {
+                Object.values(snapshot.val()).forEach(m => {
+                    list.innerHTML += `
+                        <div class="card">
+                            <img class="player-img" src="${m.picUrl || 'https://via.placeholder.com/150'}" alt="Player">
+                            <h3>${m.name}</h3>
+                            <p>Jersey: ${m.jersey} | Position: ${m.position}</p>
+                        </div>`;
+                });
+            } else { list.innerHTML = "No players found."; }
+        });
+
+        // Member Login
+        window.memberLogin = async () => {
+            const no = document.getElementById('m-no').value;
+            const pass = document.getElementById('m-pass').value;
+            const snap = await get(child(ref(db), `members/${no}`));
+            const profile = document.getElementById('member-profile');
+            if (snap.exists() && snap.val().password === pass) {
+                const m = snap.val();
+                profile.innerHTML = `
+                    <img class="player-img" src="${m.picUrl || 'https://via.placeholder.com/150'}"><br>
+                    <strong>MEMBER NAME:</strong> ${m.name}<br>
+                    <strong>JERSEY NUMBER:</strong> ${m.jersey}<br>
+                    <strong>POSITION:</strong> ${m.position}<br>
+                    <strong>MEMBER NO:</strong> ${m.no}`;
+            } else { alert("ভুল মেম্বার আইডি বা পাসওয়ার্ড!"); }
+        };
+
+        // Admin Auth
+        window.adminLogin = () => {
+            if (document.getElementById('a-pass').value === '@#$@#$@#$') {
+                document.getElementById('admin-auth').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+            } else { alert("ভুল এডমিন পাসওয়ার্ড!"); }
+        };
+        window.adminLogout = () => {
+            document.getElementById('admin-auth').style.display = 'block';
+            document.getElementById('admin-panel').style.display = 'none';
+            document.getElementById('a-pass').value = '';
+        };
+
+        // Admin actions
+        window.addNotice = () => {
+            const text = document.getElementById('n-text').value;
+            if(!text) return;
+            push(ref(db, 'notices'), { text, date: new Date().toLocaleDateString() });
+            document.getElementById('n-text').value = '';
+            alert("নোটিশ অ্যাড হয়েছে!");
+        };
+
+        window.addMember = async () => {
+            const name = document.getElementById('new-name').value;
+            const jersey = document.getElementById('new-jersey').value;
+            const position = document.getElementById('new-pos').value;
+            const no = document.getElementById('new-no').value;
+            const password = document.getElementById('new-pass').value;
+            const file = document.getElementById('new-pic').files[0];
+
+            if(!name || !no || !password || !file) { alert("সব তথ্য পূরণ করুন!"); return; }
+
+            const fileRef = sRef(storage, `member_pics/${no}`);
+            await uploadBytes(fileRef, file);
+            const picUrl = await getDownloadURL(fileRef);
+
+            await set(ref(db, `members/${no}`), { name, jersey, position, no, password, picUrl });
+            alert("মেম্বার সফলভাবে অ্যাড হয়েছে!");
+            document.querySelectorAll('#admin-panel input').forEach(i => i.value = '');
+        };
+    </script>
+</body>
+</html>
