@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HORINTATI SPORTS CLUB - Player List</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f2f5f7;
+}
+
+.header{
+    background:#087830;
+    color:white;
+    text-align:center;
+    padding:25px 10px;
+}
+
+.header h1{
+    font-size:28px;
+}
+
+.container{
+    width:95%;
+    max-width:1000px;
+    margin:25px auto;
+}
+
+.player-section{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 3px 15px #0002;
+}
+
+.player-section h2{
+    text-align:center;
+    color:#087830;
+    margin-bottom:20px;
+}
+
+/* Player images will appear here */
+.player-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+    gap:20px;
+}
+
+/* Default empty message */
+.empty{
+    text-align:center;
+    width:100%;
+    padding:40px 10px;
+    color:#777;
+    font-size:17px;
+}
+
+/* Player picture */
+.player{
+    text-align:center;
+}
+
+.player img{
+    width:140px;
+    height:140px;
+    object-fit:cover;
+    border-radius:50%;
+    border:4px solid #087830;
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+    .header h1{
+        font-size:22px;
+    }
+
+    .player-list{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .player img{
+        width:120px;
+        height:120px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <h1>⚽ HORINTATI SPORTS CLUB</h1>
+</header>
+
+<div class="container">
+
+    <section class="player-section">
+
+        <h2>⚽ PLAYER LIST</h2>
+
+        <div class="player-list" id="playerList">
+
+            <!--
+            এখন কোনো player নেই।
+            Admin player add করলে এখানে
+            player-এর ছবি দেখানো হবে।
+            -->
+
+            <div class="empty" id="emptyMessage">
+                No players added yet.
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script>
+
+/*
+=================================================
+DEFAULT PLAYER LIST
+=================================================
+
+এখন কোনো player আগে থেকে দেওয়া নেই।
+
+পরে Firebase থেকে player-এর ছবি এনে
+এই Player List-এর মধ্যে দেখানো যাবে।
+
+শুধু ছবি দেখাবে।
+নাম, Jersey, Position, Member No
+বা Password দেখাবে না।
+*/
+
+let players = [];
+
+
+/* Player List দেখানোর function */
+
+function showPlayers(){
+
+    const playerList =
+        document.getElementById("playerList");
+
+    const emptyMessage =
+        document.getElementById("emptyMessage");
+
+    /* পুরোনো player পরিষ্কার */
+    playerList
+        .querySelectorAll(".player")
+        .forEach(item => item.remove());
+
+    /* কোনো player না থাকলে */
+    if(players.length === 0){
+
+        emptyMessage.style.display = "block";
+
+        return;
+    }
+
+    emptyMessage.style.display = "none";
+
+
+    /* Player-এর শুধু ছবি দেখানো হবে */
+
+    players.forEach(player => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "player";
+
+        div.innerHTML = `
+            <img src="${player.photo}"
+                 alt="Player">
+        `;
+
+        playerList.appendChild(div);
+
+    });
+}
+
+
+/* Website চালু হলে Player List খালি থাকবে */
+
+showPlayers();
+
+</script>
+
+</body>
+</html>
